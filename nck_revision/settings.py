@@ -1,16 +1,24 @@
 from pathlib import Path
+import os
 
+# -------------------------
+# BASE SETTINGS
+# -------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-nck-revision-secret-key-change-in-production-2024'
-DEBUG = False
-ALLOWED_HOSTS = ['nck_revision-3.onrender.com']
 
-# CSRF trusted origins for production
+SECRET_KEY = 'django-insecure-nck-revision-secret-key-change-in-production-2024'
+
+DEBUG = False  # Set to False for production
+
+ALLOWED_HOSTS = ['nck-revision-4.onrender.com']
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://nck-portal.onrender.com',
+    'https://nck-revision-4.onrender.com',
 ]
 
-
+# -------------------------
+# INSTALLED APPS
+# -------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,8 +30,12 @@ INSTALLED_APPS = [
     'questions',
 ]
 
+# -------------------------
+# MIDDLEWARE
+# -------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Serve static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -32,6 +44,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# -------------------------
+# URL & WSGI
+# -------------------------
 ROOT_URLCONF = 'nck_revision.urls'
 
 TEMPLATES = [
@@ -52,6 +67,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nck_revision.wsgi.application'
 
+# -------------------------
+# DATABASE
+# -------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -59,6 +77,9 @@ DATABASES = {
     }
 }
 
+# -------------------------
+# AUTHENTICATION
+# -------------------------
 AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -70,15 +91,31 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# -------------------------
+# INTERNATIONALIZATION
+# -------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_TZ = True
 
+# -------------------------
+# STATIC FILES (WhiteNoise)
+# -------------------------
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise storage
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# -------------------------
+# DEFAULT AUTO FIELD
+# -------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# -------------------------
+# CUSTOM SETTINGS
+# -------------------------
 MPESA_NUMBER = '0114245222'
 SUBSCRIPTION_AMOUNT = 200
