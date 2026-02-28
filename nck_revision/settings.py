@@ -3,7 +3,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nck-revision-secret-key-change-in-production-2024'
 DEBUG = True
-ALLOWED_HOSTS = ['nck-portal-1.onrender.com']
+ALLOWED_HOSTS = ['nck_revision-1.onrender.com']
 
 # CSRF trusted origins for production
 CSRF_TRUSTED_ORIGINS = [
